@@ -13,11 +13,16 @@ transactions = [
     {'id': 3, 'date': '2023-06-03', 'amount': 300}
 ]
 
+# Function to calculate total balance
+def calculate_total_balance():
+    return sum(transaction['amount'] for transaction in transactions)
+
 # Read operation
 @app.route("/")
 
 def get_transactions():
-    return render_template("transactions.html", transactions=transactions)
+    total_balance = calculate_total_balance()
+    return render_template("transactions.html", transactions=transactions, total_balance = total_balance)
 
 # Create operation: Display add transaction form
 # Route to handle the creation of a new transaction
@@ -89,6 +94,8 @@ def delete_transaction(transaction_id):
 @app.route("/search", methods=["GET", "POST"])
 
 def search_transactions():
+    total_balance = calculate_total_balance()
+
     if request.method == 'POST':
         try:
             min_amount = float(request.form.get('min_amount', 0))
@@ -103,7 +110,7 @@ def search_transactions():
             if min_amount <= transaction['amount'] <= max_amount
         ]
         
-        return render_template('transactions.html', transactions=filtered_transactions)
+        return render_template('transactions.html', transactions=filtered_transactions, total_balance = total_balance)
     
     # If GET request, render the search form
     return render_template('search.html')

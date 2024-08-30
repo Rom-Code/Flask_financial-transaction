@@ -26,6 +26,7 @@
         .form-actions {
             display: flex;
             justify-content: center;
+            gap: 10px;
             margin-top: 20px;
         }
 
@@ -37,6 +38,16 @@
         .btn-primary:hover {
             background-color: #f6d365;
             border-color: #f6d365;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
         }
     </style>
 </head>
@@ -54,6 +65,7 @@
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Search</button>
+                <a class="btn btn-secondary" href="{{ url_for('get_transactions') }}">Back to Transactions</a>
             </div>
         </form>
     </div>
